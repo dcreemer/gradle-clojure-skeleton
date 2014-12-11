@@ -1,0 +1,58 @@
+// Example build.grade for a Clojure application
+// which includes Java (library) code as well.
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://clojars.org/repo" }
+    }
+    dependencies {
+        classpath 'clojuresque:clojuresque-base:1.7.0'
+        classpath 'clojuresque:clojuresque-extras:1.0.0'
+    }
+}
+
+// min needed for Clojure source
+apply plugin: 'clojure-min'
+
+// for "gradle deps" and "gradle uberjar":
+apply plugin: 'clojure-extras'
+
+// for "gradle run"
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+    clojarsRepo()
+}
+
+// build Java before Clojure:
+compileClojure.dependsOn compileJava
+
+group = 'mygroup'
+version = '0.0.1'
+
+clojure {
+    warnOnReflection = true
+    aotCompile = true
+    uberjar.enabled = true
+}
+
+dependencies {
+    compile 'org.clojure:clojure:1.6.0'
+    compile 'org.clojure:tools.cli:0.3.1'
+    compile 'org.clojure:tools.nrepl:0.2.5'
+    compile 'cider:cider-nrepl:0.8.1'
+}
+
+jar
+{
+    manifest.attributes("Main-Class": "skel.main")
+}
+
+uberjar
+{
+    manifest.attributes("Main-Class": "skel.main")
+}
+
+mainClassName = "skel.main"
