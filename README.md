@@ -4,7 +4,7 @@ gradle-clojure-skeleton
 A basic skeleton application for Clojure, with the following features:
 
 - uses the [Gradle](https://www.gradle.org/) build tool
-- uses the [clojuresqe](https://github.com/clojuresque/clojuresque) Gradle plugin
+- uses the [clojuresque](https://github.com/clojuresque/clojuresque) Gradle plugin
 - main() is in Clojure
 - includes local Java files
 - includes 3rd party libraries
